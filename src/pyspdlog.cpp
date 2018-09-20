@@ -430,6 +430,9 @@ PYBIND11_MODULE(spdlog, m) {
         .value("local", spdlog::pattern_time_type::local)
         .value("utc", spdlog::pattern_time_type::utc)
         .export_values();
+    
+    py::class_<Sink>(m, "Sink")
+        ;
 
     py::class_<Logger>(m, "Logger")
         .def("log", &Logger::log)
@@ -491,6 +494,19 @@ PYBIND11_MODULE(spdlog, m) {
                 py::arg("minute") = 0
             )
        ;
+
+    py::class_<SinkLogger, Logger>(m, "SinkLogger")
+        .def(py::init<std::string, Sink>(),
+                py::arg("name"),
+                py::arg("sink")
+            )
+
+        .def(py::init<std::string, std::vector<Sink> >(),
+                py::arg("name"),
+                py::arg("sinks")
+            )
+        ;
+
 //SyslogLogger(const std::string& logger_name, const std::string& ident = "", int syslog_option = 0, int syslog_facilty = (1<<3))
 #ifdef SPDLOG_ENABLE_SYSLOG
     py::class_<SyslogLogger, Logger>(m, "SyslogLogger")
