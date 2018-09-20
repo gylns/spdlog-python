@@ -212,9 +212,9 @@ protected:
 class ConsoleLogger : public Logger
 {
 public:
-    ConsoleLogger(const std::string& logger_name, bool multithreaded, bool stdout, bool colored) : Logger(logger_name)
+    ConsoleLogger(const std::string& logger_name, bool multithreaded, bool StdOut, bool colored) : Logger(logger_name)
     {
-        if(stdout)
+        if(StdOut)
         {
             if(multithreaded)
             {
