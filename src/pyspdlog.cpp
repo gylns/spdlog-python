@@ -477,7 +477,7 @@ PYBIND11_MODULE(spdlog, m) {
             )
         ;
     py::class_<RotatingLogger, Logger>(m, "RotatingLogger")
-        .def(py::init<std::string, std::string, bool, bool, bool>(),
+        .def(py::init<std::string, std::string, bool, size_t, size_t>(),
                 py::arg("name"),
                 py::arg("filename"), 
                 py::arg("multithreaded"), 
